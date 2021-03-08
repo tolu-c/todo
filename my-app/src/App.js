@@ -14,6 +14,8 @@ class App extends React.Component {
       editing: false,
     };
     this.fetchTasks = this.fetchTasks.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -31,16 +33,51 @@ class App extends React.Component {
       );
   }
 
+  handleChange(e) {
+    var name = e.target.name;
+    var value = e.target.value;
+    console.log(`Name: ${name} and Value : ${value}`);
+
+    this.setState({
+      activeItem: {
+        ...this.state.activeItem,
+        title: value,
+      },
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log("ITEM:", this.state.activeItem);
+
+    var url = "http://127.0.0.1:8000/todo/task-create/";
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(this.state.activeItem),
+    }).then((response) => {
+      this.fetchTasks();
+      this.setState({
+        activeItem: {
+          id: null,
+          title: "",
+          completed: false,
+        },
+      })
+    });
+  }
+
   render() {
     var tasks = this.state.todoList;
     return (
       <div className="container">
         <div id="task-container">
           <div id="form-wrapper">
-            <form id="form">
+            <form onSubmit={this.handleSubmit} id="form">
               <div className="flex-wrapper">
                 <div style={{ flex: 6 }}>
                   <input
+                    onChange={this.handleChange}
                     id="title"
                     className="form-control"
                     type="text"
@@ -74,7 +111,7 @@ class App extends React.Component {
                   </div>
                   <div style={{ flex: 1 }}>
                     <button className="btn btn-sm btn-outline-dark delete">
-                    {/* <ion-icon name="checkmark-outline"></ion-icon> */}-
+                      {/* <ion-icon name="checkmark-outline"></ion-icon> */}-
                     </button>
                   </div>
                 </div>
