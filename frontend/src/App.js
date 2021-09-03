@@ -45,7 +45,7 @@ export default class App extends Component {
   fetchTasks() {
     console.log("fetching...");
 
-    fetch("djangoxreact-todo-app.herokuapp.com/api/task-list/")
+    fetch("/api/task-list/")
       .then((response) => response.json())
       .then((data) =>
         this.setState({
@@ -70,10 +70,10 @@ export default class App extends Component {
     console.log("Item:", this.state.activeItem);
     let csrftoken = this.getCookie("csrftoken");
 
-    let url = "djangoxreact-todo-app.herokuapp.com/api/task-create/";
+    let url = "/api/task-create/";
 
     if (this.state.editing === true) {
-      url = `djangoxreact-todo-app.herokuapp.com/api/task-update/${this.state.activeItem.id}/`;
+      url = `/api/task-update/${this.state.activeItem.id}/`;
       this.setState({
         editing: false,
       });
@@ -110,7 +110,7 @@ export default class App extends Component {
 
   deleteItem(task) {
     let csrftoken = this.getCookie("csrftoken");
-    fetch(`djangoxreact-todo-app.herokuapp.com/api/task-delete/${task.id}/`, {
+    fetch(`/api/task-delete/${task.id}/`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
@@ -125,7 +125,7 @@ export default class App extends Component {
     task.completed = !task.completed;
     console.log(`task: ${task.completed}`);
     let csrftoken = this.getCookie("csrftoken");
-    let url = `djangoxreact-todo-app.herokuapp.com/api/task-update/${task.id}/`;
+    let url = `/api/task-update/${task.id}/`;
 
     fetch(url, {
       method: "POST",
