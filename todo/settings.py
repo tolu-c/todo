@@ -26,7 +26,7 @@ SECRET_KEY = '8+^aorlh234cnrnfz%b6+(%ea0ri4wyr57+17m7&5kl^*w^foq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['djangoxreact-todo-app.herokuapp.com', 'www.djangoxreact-todo-app.herokuapp.com']
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', 'djangoxreact-todo-app.herokuapp.com']
 
 
 # Application definition
