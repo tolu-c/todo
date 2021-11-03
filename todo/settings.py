@@ -134,7 +134,7 @@ STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'frontend/builder/static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    "https://djangoxreact-todo-app.herokuapp.com/",
+    "https://djangoxreact-todo-app.herokuapp.com",
 ]
 
 django_heroku.settings(locals())
